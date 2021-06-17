@@ -14,16 +14,19 @@ type
 
   TfoGJReport = class(TForm)
     Query: TSQLQuery;
+    QueryEvent: TStringField;
+    QueryIDate: TStringField;
+    QueryDueDate: TStringField;
+    QueryRecType: TStringField;
+    QuerySTATUS: TLongintField;
+    QueryAmount: TFloatField;
     DataSource: TDataSource;
     DBGrid: TDBGrid;
     Grid: TStringGrid;
     Panel1: TPanel;
     Button6: TButton;
-    QueryAmount: TFloatField;
-    QueryDueDate: TStringField;
-    QueryEvent: TStringField;
-    QueryIDate: TStringField;
-    QuerySTATUS: TLongintField;
+    QueryTax: TFloatField;
+    Splitter1: TSplitter;
     procedure FormShow(Sender: TObject);
     procedure GridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);
     procedure QuerySTATUSGetText(Sender: TField; var aText: string; DisplayText: Boolean);
@@ -44,10 +47,11 @@ uses
 { TfoGJReport }
 
 procedure TfoGJReport.FormShow(Sender: TObject);
-var
-  r: integer;
-  a: string;
+var r: integer;
 begin
+  QueryTax   .DisplayFormat:=dm.PriceFormat;
+  QueryAmount.DisplayFormat:=dm.PriceFormat;
+
   Grid.Cells[1, 0]:=dm.BName;
   Grid.Cells[1, 1]:='GENERAL JOURNAL';
   Grid.Cells[1, 2]:='Date: '+FormatDateTime(SARIDateFormat, Date);
@@ -55,31 +59,46 @@ begin
   Grid.Cells[1, 3]:='Account name';
   Grid.Cells[2, 3]:='Debit';
   Grid.Cells[3, 3]:='Credit';
-  r:=3;
-  Grid.RowCount:=r+1;
+  r:=4;
+
   Query.Open;
   while not Query.Eof do begin
-    Grid.RowCount:=Grid.RowCount+3;
-    Grid  .Cells[0, r+Query.RecNo  ]:=QueryEvent.AsString; //FormatDateTime(SARIDateFormat, QueryEvent.AsDateTime);
-    a:=FormatFloat(dm.PriceFormat, QueryAmount.AsFloat);
-    Grid  .Cells[2, r+Query.RecNo  ]:=a;
-    Grid  .Cells[3, r+Query.RecNo+1]:=a;
-    if (QuerySTATUS.AsInteger=IARISPaid) and (QueryIDate.AsString=QueryDueDate.AsString) then begin
-      Grid.Cells[1, r+Query.RecNo  ]:='Cash';
-      Grid.Cells[1, r+Query.RecNo+1]:='-      Account Receivable';
-      Grid.Cells[1, r+Query.RecNo+2]:='(cash for sold widgets)'
-    end else if (QuerySTATUS.AsInteger=IARISPaid) and (QueryEvent.AsString=QueryDueDate.AsString) then begin
-      Grid.Cells[1, r+Query.RecNo  ]:='Cash';
-      Grid.Cells[1, r+Query.RecNo+1]:='-      Account Receivable';
-      Grid.Cells[1, r+Query.RecNo+2]:=Format('(cash from clients billed on %s )', [QueryIDate.AsString]);
-    end else begin
-      Grid.Cells[1, r+Query.RecNo  ]:='Account Receivable';
-      Grid.Cells[1, r+Query.RecNo+1]:='-      Sales Revenue';
-      Grid.Cells[1, r+Query.RecNo+2]:='(billed clients for widgets)';
+    Grid.RowCount:=r+4;
+    Grid  .Cells[0, r  ]:=QueryEvent.AsString;
+    if QueryRecType.AsString='tax' then begin
+      Grid.Cells[2, r  ]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat);
+      Grid.Cells[3, r+1]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat);
+      Grid.Cells[1, r  ]:='Sales Tax Liabilities';
+      Grid.Cells[1, r+1]:='-      Cash';
+      Grid.Cells[1, r+2]:='(sales tax)'
+    end else if QueryRecType.AsString='cash' then begin
+      Grid.Cells[2, r  ]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat+QueryAmount.AsFloat);
+      Grid.Cells[3, r+1]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat+QueryAmount.AsFloat);
+      Grid.Cells[1, r  ]:='Cash';
+      Grid.Cells[1, r+1]:='-      Account Receivable';
+      Grid.Cells[1, r+2]:=Format('(cash from clients billed on %s )', [QueryIDate.AsString]);
+    end else if QueryRecType.AsString='sale' then begin
+      Grid.Cells[2, r  ]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat+QueryAmount.AsFloat);
+      Grid.Cells[3, r+1]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat+QueryAmount.AsFloat);
+      Grid.Cells[1, r  ]:='Cash';
+      Grid.Cells[1, r+1]:='-      Account Receivable';
+      Grid.Cells[1, r+2]:='(cash for sold widgets)'
+    end else begin //if QueryRecType.AsString='bill' then
+      Grid.RowCount:=Grid.RowCount+1;
+      Grid.Cells[2, r  ]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat+QueryAmount.AsFloat);
+      Grid.Cells[3, r+1]:=FormatFloat(dm.PriceFormat,                  QueryAmount.AsFloat);
+      Grid.Cells[3, r+2]:=FormatFloat(dm.PriceFormat, QueryTax.AsFloat);
+      Grid.Cells[1, r  ]:='Account Receivable';
+      Grid.Cells[1, r+1]:='-      Sales';
+      Grid.Cells[1, r+2]:='-      Sales Tax Liabilities';
+      Grid.Cells[1, r+3]:='(billed clients for widgets)';
+      Inc(r);
     end;
-    Inc(r, 2);
+    Inc(r, 3);
     Query.Next;
   end;
+
+  Grid.RowCount:=r;
 end;
 
 procedure TfoGJReport.GridDrawCell(Sender: TObject; aCol, aRow: Integer; aRect: TRect; aState: TGridDrawState);

@@ -18,5 +18,10 @@ Create AR invoices and generate General Journal. (Lazarus/Free Pascal, SQLite)
 ### New Invoice (pending finalizations):
 ![image](https://user-images.githubusercontent.com/995706/122370832-10c7a580-cf68-11eb-8f05-638ad20a39f8.png)
 
-### General Journal (pending finalizations):
-![image](https://user-images.githubusercontent.com/995706/122370777-06a5a700-cf68-11eb-8f25-e791161fc76c.png)
+### General Journal (pending finalizations)
+
+#### Sales tax per month:
+![image](https://user-images.githubusercontent.com/995706/122393750-e1bc2e80-cf7d-11eb-96f1-b5877adab818.png)
+
+#### Sales tax per day:
+![image](https://user-images.githubusercontent.com/995706/122393723-da952080-cf7d-11eb-8170-ed0e0f241be5.png)
