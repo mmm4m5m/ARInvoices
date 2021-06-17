@@ -62,7 +62,7 @@ object foInvoices: TfoInvoices
         Width = 200
         FieldName = 'TERMS'
       end>
-    DataSource = DataSource1
+    DataSource = DataSource
     Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisableDelete, dgDisableInsert, dgDisplayMemoText]
     TabOrder = 0
     OnDrawColumnCell = DBGridDrawColumnCell
@@ -108,7 +108,7 @@ object foInvoices: TfoInvoices
       TabOrder = 2
     end
   end
-  object DataSource1: TDataSource
+  object DataSource: TDataSource
     DataSet = Query
     Left = 32
     Top = 96

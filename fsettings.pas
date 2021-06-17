@@ -1,5 +1,7 @@
 unit fSettings;
 
+// todo: add multiple settings (and allow delete without ARITest)
+
 {$mode objfpc}{$H+}
 
 {-$define ARITest}
@@ -27,7 +29,7 @@ type
     QueryINVOICE: TMemoField;
     QueryTAX: TFloatField;
     QueryTERMS: TMemoField;
-    DataSource1: TDataSource;
+    DataSource: TDataSource;
     Panel4: TPanel;
     Panel2: TPanel;
     Label1: TLabel;

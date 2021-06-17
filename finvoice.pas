@@ -1,5 +1,16 @@
 unit fInvoice;
 
+// todo: item/row number after Del row/item
+// todo: move summary on DBGrid column resize? On DBGrid horizontal scroll?
+// todo: View Invoice
+// todo: Set 'Paid' button and DBGrid click
+// todo: generate new/next inv.number
+// todo: add validation on change - remove validation on save
+// todo: items in terms combobox. auto calc Due date for terms '1 day', '1 week', etc.
+// todo: integer to TObject warnings
+// todo: consider EditMask for input (for edit the tax)
+// todo: Invoice Edit and status 'incomplete' (long invoice - save and stop, then edit again and continue)
+
 {$mode objfpc}{$H+}
 
 interface
@@ -109,7 +120,7 @@ type
     function  GetTaxText: string;
     procedure UpdateSum;
     procedure CalcRow(Sub, Add: boolean);
-    procedure CalcSum; //???
+    procedure CalcSum; // todo: view invoice and eventually recalc/refresh Sum button
     function  ProductValidate(const Value: string; const Field: string=''): boolean;
   public
 
@@ -190,7 +201,7 @@ end;
 
 procedure TfoInvoice.OnEditorTextChanged(Edit: TCustomMaskEdit; Field: TField);
 begin
-// todo: if Field=Query.FieldByName('QueryProduct' ) then SetEditValid(ProductValidate(Edit.Text), Edit);
+//if Field=Query.FieldByName('QueryProduct' ) then SetEditValid(ProductValidate(Edit.Text), Edit); // todo: it is not the default editor
   if Field=Query.FieldByName('QueryPRICE'   ) then PriceValidate(Edit);
   if Field=Query.FieldByName('QueryQUANTITY') then PriceValidate(Edit);
 end;
@@ -304,7 +315,6 @@ end;
 
 procedure TfoInvoice.bNumberClick(Sender: TObject);
 begin
-  // todo: generate next inv.number
   eNumber.Text:=dm.Invoice;
   dtDate.SetFocus;
 end;
@@ -328,7 +338,6 @@ end;
 
 procedure TfoInvoice.dtDueDateEnter(Sender: TObject);
 begin
-  // todo: auto calc Due date for terms '1 day', '1 week', etc.
   if dtDueDate.DateIsNull then dtDueDate.Date:=Date;
 end;
 
@@ -345,7 +354,6 @@ end;
 procedure TfoInvoice.bSaveClick(Sender: TObject);
 var idx, id, rn: integer;
 begin
-  // todo: validate on change, disable Save
   if cbClient .Text=''  then raise EDatabaseError.CreateFmt(SNeedField, [lClient  .Caption]);
   if eNumber .Text=''  then raise EDatabaseError.CreateFmt(SNeedField, [lNumber .Caption]);
   if eCurrency.Text=''  then raise EDatabaseError.CreateFmt(SNeedField, [lCurrency.Caption]);
@@ -451,7 +459,7 @@ end;
 procedure TfoInvoice.CalcSum;
 var rn: integer;
 begin
-  // todo: recalc/refresh Sum button
+  // todo: use MemDataSet buffers - recalc without Next/Prev (recalc in insert/edit mode)
   Query.DisableControls;
   rn:=Query.RecNo;
   try
