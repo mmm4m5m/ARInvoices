@@ -1,0 +1,10 @@
+/backup/
+/lib/
+/link*.res
+/ARInvoices.sqlite
+/arinvoices.lps
+/arinvoices
+/arinvoices.dbg
+/arinvoices.ico
+/arinvoices.res
+/libsqlite3.so

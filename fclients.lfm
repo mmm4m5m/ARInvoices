@@ -1,0 +1,193 @@
+object foClients: TfoClients
+  Left = 316
+  Height = 600
+  Top = 161
+  Width = 800
+  Caption = 'Clients'
+  ClientHeight = 600
+  ClientWidth = 800
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.0.12.0'
+  object DBGrid: TDBGrid
+    Left = 0
+    Height = 550
+    Top = 0
+    Width = 800
+    Align = alClient
+    Color = clWindow
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Caption = 'ID'
+        Width = 50
+        FieldName = 'ID'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Name'
+        Width = 218
+        FieldName = 'NAME'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'E-mail'
+        Width = 150
+        FieldName = 'EMAIL'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Address'
+        Width = 250
+        FieldName = 'ADDRESS'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Phone'
+        Width = 100
+        FieldName = 'PHONE'
+      end>
+    DataSource = DataSource
+    TabOrder = 0
+    OnColEnter = DBGridColEnter
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 550
+    Width = 800
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 800
+    TabOrder = 1
+    object Button6: TButton
+      Left = 700
+      Height = 25
+      Top = 10
+      Width = 75
+      Anchors = [akTop, akRight]
+      Cancel = True
+      Caption = 'Close'
+      ModalResult = 2
+      TabOrder = 0
+    end
+  end
+  object DataSource: TDataSource
+    DataSet = Query
+    OnStateChange = DataSourceStateChange
+    Left = 32
+    Top = 96
+  end
+  object Query: TSQLQuery
+    PacketRecords = -1
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NAME'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'EMAIL'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'ADDRESS'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'PHONE'
+        DataType = ftMemo
+        Precision = -1
+      end>
+    BeforePost = QueryBeforePost
+    Database = dm.dbDM
+    Transaction = dm.SQLTransaction1
+    SQL.Strings = (
+      'select * from CLIENTS'
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit]
+    Params = <>
+    Macros = <>
+    Left = 32
+    Top = 32
+    object QueryID: TAutoIncField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ReadOnly = True
+      Required = False
+    end
+    object QueryNAME: TMemoField
+      DisplayLabel = 'Name'
+      FieldKind = fkData
+      FieldName = 'NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      OnSetText = QueryMemoSetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryEMAIL: TMemoField
+      DisplayLabel = 'E-mail'
+      FieldKind = fkData
+      FieldName = 'EMAIL'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      OnSetText = QueryEMAILSetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryADDRESS: TMemoField
+      DisplayLabel = 'Address'
+      FieldKind = fkData
+      FieldName = 'ADDRESS'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      OnSetText = QueryMemoSetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryPHONE: TMemoField
+      DisplayLabel = 'Phone'
+      FieldKind = fkData
+      FieldName = 'PHONE'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryPHONEGetText
+      OnSetText = QueryPHONESetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+  end
+end

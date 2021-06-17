@@ -1,0 +1,25 @@
+object dm: Tdm
+  OnCreate = DataModuleCreate
+  OnDestroy = DataModuleDestroy
+  OldCreateOrder = False
+  Height = 184
+  HorizontalOffset = 316
+  VerticalOffset = 161
+  Width = 150
+  object dbDM: TSQLite3Connection
+    Connected = False
+    LoginPrompt = False
+    DatabaseName = 'ARInvoices.sqlite'
+    KeepConnection = False
+    Transaction = SQLTransaction1
+    AlwaysUseBigint = False
+    Left = 32
+    Top = 32
+  end
+  object SQLTransaction1: TSQLTransaction
+    Active = False
+    Database = dbDM
+    Left = 32
+    Top = 96
+  end
+end

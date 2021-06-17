@@ -1,0 +1,891 @@
+object foInvoice: TfoInvoice
+  Left = 373
+  Height = 600
+  Top = 163
+  Width = 800
+  Caption = 'Invoice'
+  ClientHeight = 600
+  ClientWidth = 800
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.0.12.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 550
+    Width = 800
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 800
+    TabOrder = 4
+    object Button4: TButton
+      Left = 25
+      Height = 25
+      Top = 10
+      Width = 75
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 2
+    end
+    object bSetPaid: TButton
+      Left = 125
+      Height = 25
+      Top = 10
+      Width = 125
+      Caption = 'Set Status "Paid"'
+      OnClick = bSetPaidClick
+      TabOrder = 0
+    end
+    object bSave: TButton
+      Left = 700
+      Height = 25
+      Top = 10
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Save'
+      Default = True
+      OnClick = bSaveClick
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 118
+    Top = 0
+    Width = 800
+    Align = alTop
+    ClientHeight = 118
+    ClientWidth = 800
+    TabOrder = 0
+    object lClient: TLabel
+      Left = 20
+      Height = 17
+      Top = 17
+      Width = 38
+      Caption = 'Client'
+      ParentColor = False
+    end
+    object eNumber: TEdit
+      Left = 90
+      Height = 27
+      Top = 40
+      Width = 250
+      AutoSize = False
+      TabOrder = 1
+    end
+    object lNumber: TLabel
+      Left = 20
+      Height = 17
+      Top = 47
+      Width = 62
+      Caption = 'Invoice #'
+      FocusControl = eNumber
+      ParentColor = False
+    end
+    object lDate: TLabel
+      Left = 20
+      Height = 17
+      Top = 77
+      Width = 31
+      Caption = 'Date'
+      ParentColor = False
+    end
+    object dtDate: TDateTimePicker
+      Left = 90
+      Height = 27
+      Top = 70
+      Width = 275
+      CenturyFrom = 1941
+      DateDisplayOrder = ddoYMD
+      MaxDate = 2958465
+      MinDate = -53780
+      AutoSize = False
+      TabOrder = 3
+      DateSeparator = '-'
+      TrailingSeparator = False
+      TextForNullDate = '(Invoice Date)'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeSeparator = ':'
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 1.79769313486232E308
+      Time = 1.79769313486232E308
+      UseDefaultSeparators = False
+      AutoButtonSize = True
+      HideDateTimeParts = [dtpHour, dtpMinute, dtpSecond, dtpMiliSec]
+      MonthNames = 'Long'
+      OnCloseUp = dtDateCloseUp
+      OnEnter = dtDateEnter
+    end
+    object cbTerms: TComboBox
+      Left = 505
+      Height = 27
+      Top = 40
+      Width = 275
+      ItemHeight = 0
+      OnSelect = cbTermsSelect
+      TabOrder = 5
+    end
+    object lPaymentTerms: TLabel
+      Left = 395
+      Height = 17
+      Top = 47
+      Width = 100
+      Caption = 'Payment Terms'
+      ParentColor = False
+    end
+    object lDueDate: TLabel
+      Left = 395
+      Height = 17
+      Top = 77
+      Width = 61
+      Caption = 'Due Date'
+      ParentColor = False
+    end
+    object dtDueDate: TDateTimePicker
+      Left = 505
+      Height = 27
+      Top = 70
+      Width = 275
+      CenturyFrom = 1941
+      DateDisplayOrder = ddoYMD
+      MaxDate = 2958465
+      MinDate = -53780
+      AutoSize = False
+      TabOrder = 6
+      DateSeparator = '-'
+      TrailingSeparator = False
+      TextForNullDate = '(Due Date)'
+      LeadingZeros = True
+      Kind = dtkDate
+      TimeSeparator = ':'
+      TimeFormat = tf24
+      TimeDisplay = tdHMS
+      DateMode = dmComboBox
+      Date = 1.79769313486232E308
+      Time = 1.79769313486232E308
+      UseDefaultSeparators = False
+      AutoButtonSize = True
+      HideDateTimeParts = [dtpHour, dtpMinute, dtpSecond, dtpMiliSec]
+      MonthNames = 'Long'
+      OnCloseUp = dtDueDateCloseUp
+      OnEnter = dtDueDateEnter
+    end
+    object cbClient: TComboBox
+      Left = 90
+      Height = 27
+      Top = 10
+      Width = 275
+      AutoSize = False
+      ItemHeight = 0
+      OnSelect = cbClientSelect
+      TabOrder = 0
+    end
+    object lCurrency: TLabel
+      Left = 395
+      Height = 17
+      Top = 17
+      Width = 58
+      Caption = 'Currency'
+      ParentColor = False
+    end
+    object eCurrency: TEdit
+      Left = 505
+      Height = 27
+      Top = 10
+      Width = 275
+      TabOrder = 4
+    end
+    object bNumber: TButton
+      Left = 340
+      Height = 27
+      Top = 40
+      Width = 25
+      Caption = '<'
+      Font.Style = [fsBold]
+      OnClick = bNumberClick
+      ParentFont = False
+      TabOrder = 2
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 126
+    Top = 424
+    Width = 800
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 126
+    ClientWidth = 800
+    TabOrder = 3
+    object GroupBox1: TGroupBox
+      Left = 0
+      Height = 121
+      Top = 5
+      Width = 400
+      Align = alLeft
+      Caption = 'Notes'
+      ClientHeight = 102
+      ClientWidth = 396
+      TabOrder = 0
+      object mNotes: TMemo
+        Left = 3
+        Height = 96
+        Top = 3
+        Width = 390
+        Anchors = [akTop, akLeft, akRight, akBottom]
+        BorderStyle = bsNone
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+    end
+    object GroupBox2: TGroupBox
+      Left = 400
+      Height = 121
+      Top = 5
+      Width = 400
+      Align = alClient
+      Caption = 'Terms'
+      ClientHeight = 102
+      ClientWidth = 396
+      TabOrder = 1
+      object mTerms: TMemo
+        Left = 3
+        Height = 96
+        Top = 3
+        Width = 390
+        BorderStyle = bsNone
+        ScrollBars = ssAutoBoth
+        TabOrder = 0
+      end
+    end
+    object Panel4: TPanel
+      Left = 0
+      Height = 5
+      Top = 0
+      Width = 800
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 2
+    end
+  end
+  object DBGrid: TDBGrid
+    Left = 0
+    Height = 206
+    Top = 118
+    Width = 800
+    Align = alClient
+    Color = clWindow
+    Columns = <    
+      item
+        Alignment = taCenter
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Caption = '#'
+        Width = 40
+        FieldName = 'QueryRow'
+      end    
+      item
+        ButtonStyle = cbsPickList
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Item'
+        Width = 348
+        FieldName = 'QueryProduct'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Rate'
+        Width = 120
+        FieldName = 'QueryPRICE'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Qty'
+        Width = 50
+        FieldName = 'QueryQUANTITY'
+      end    
+      item
+        ReadOnly = True
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Amount'
+        Width = 130
+        FieldName = 'QueryAmount'
+      end    
+      item
+        ButtonStyle = cbsCheckboxColumn
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Tax'
+        Width = 40
+        FieldName = 'QueryTAXABLE'
+      end    
+      item
+        ButtonStyle = cbsButtonColumn
+        PickList.Strings = (
+          'deke'
+        )
+        Title.Caption = ''
+        Width = 40
+        FieldName = 'QueryDel'
+      end>
+    DataSource = DataSource
+    TabOrder = 1
+    OnColEnter = DBGridColEnter
+    OnEditButtonClick = DBGridEditButtonClick
+  end
+  object Panel5: TPanel
+    Left = 0
+    Height = 100
+    Top = 324
+    Width = 800
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 100
+    ClientWidth = 800
+    TabOrder = 2
+    object gSummary: TStringGrid
+      Left = 401
+      Height = 97
+      Top = 0
+      Width = 301
+      ColCount = 2
+      Columns = <      
+        item
+          Alignment = taRightJustify
+          Color = clCream
+          Title.Alignment = taRightJustify
+          Title.Caption = 'Desc'
+          Width = 170
+        end      
+        item
+          Alignment = taRightJustify
+          Color = clCream
+          ReadOnly = True
+          Title.Alignment = taRightJustify
+          Title.Caption = 'Sum'
+          Width = 130
+        end>
+      FixedCols = 0
+      FixedRows = 0
+      Flat = True
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing, goSmoothScroll, goFixedColSizing]
+      RowCount = 8
+      ScrollBars = ssNone
+      TabOrder = 0
+      OnDrawCell = gSummaryDrawCell
+      OnEditingDone = gSummaryEditingDone
+      OnGetEditText = gSummaryGetEditText
+      OnSelectCell = gSummarySelectCell
+      ColWidths = (
+        170
+        130
+      )
+      Cells = (
+        4
+        0
+        0
+        'Subtotal'
+        0
+        1
+        'Tax (10%)'
+        0
+        2
+        'Total'
+        0
+        3
+        'Balance Due'
+      )
+    end
+  end
+  object Query: TMemDataset
+    Active = True
+    FieldDefs = <    
+      item
+        Name = 'QueryRow'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end    
+      item
+        Name = 'QueryID_PRODUCTS'
+        DataType = ftInteger
+      end    
+      item
+        Name = 'QueryProduct'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 255
+      end    
+      item
+        Name = 'QueryPRICE'
+        Attributes = [faRequired]
+        DataType = ftFloat
+      end    
+      item
+        Name = 'QueryQUANTITY'
+        Attributes = [faRequired]
+        DataType = ftFloat
+      end    
+      item
+        Name = 'QueryAmount'
+        DataType = ftFloat
+      end    
+      item
+        Name = 'QueryTAXABLE'
+        Attributes = [faRequired]
+        DataType = ftInteger
+      end    
+      item
+        Name = 'QueryDel'
+        Attributes = [faRequired]
+        DataType = ftString
+        Size = 8
+      end>
+    BeforeEdit = QueryBeforeEdit
+    BeforePost = QueryBeforePost
+    AfterPost = QueryAfterPost
+    AfterCancel = QueryAfterCancel
+    BeforeDelete = QueryBeforeDelete
+    Left = 32
+    Top = 168
+  end
+  object DataSource: TDataSource
+    DataSet = Query
+    OnStateChange = DataSourceStateChange
+    Left = 32
+    Top = 226
+  end
+  object qInvoices: TSQLQuery
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'ID_CLIENTS'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'INUMBER'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'IDATE'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'ICURRENCY'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'TAX'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'TERMS'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'DUEDATE'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'NOTES'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'TERMSNOTES'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'STATUS'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    Database = dm.dbDM
+    Transaction = dm.SQLTransaction1
+    SQL.Strings = (
+      'select * from INVOICES where false'
+    )
+    Options = [sqoAutoApplyUpdates]
+    Params = <>
+    Macros = <>
+    Left = 112
+    Top = 168
+    object qInvoicesID: TAutoIncField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ReadOnly = True
+      Required = False
+    end
+    object qInvoicesID_CLIENTS: TLongintField
+      FieldKind = fkData
+      FieldName = 'ID_CLIENTS'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qInvoicesINUMBER: TMemoField
+      FieldKind = fkData
+      FieldName = 'INUMBER'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = MemoGetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qInvoicesIDATE: TMemoField
+      FieldKind = fkData
+      FieldName = 'IDATE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qInvoicesICURRENCY: TMemoField
+      FieldKind = fkData
+      FieldName = 'ICURRENCY'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qInvoicesTAX: TFloatField
+      FieldKind = fkData
+      FieldName = 'TAX'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = -1
+    end
+    object qInvoicesTERMS: TMemoField
+      FieldKind = fkData
+      FieldName = 'TERMS'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qInvoicesDUEDATE: TMemoField
+      FieldKind = fkData
+      FieldName = 'DUEDATE'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qInvoicesNOTES: TMemoField
+      FieldKind = fkData
+      FieldName = 'NOTES'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qInvoicesTERMSNOTES: TMemoField
+      FieldKind = fkData
+      FieldName = 'TERMSNOTES'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = False
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qInvoicesSTATUS: TLongintField
+      FieldKind = fkData
+      FieldName = 'STATUS'
+      Index = 10
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+  end
+  object qInvRows: TSQLQuery
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftAutoInc
+        Precision = -1
+      end    
+      item
+        Name = 'ID_INVOICE'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'ID_PRODUCT'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'PRICE'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'QUANTITY'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'TAXABLE'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    Database = dm.dbDM
+    Transaction = dm.SQLTransaction1
+    SQL.Strings = (
+      'select * from INVOICES_ROWS where false'
+    )
+    Options = [sqoAutoApplyUpdates]
+    Params = <>
+    Macros = <>
+    Left = 192
+    Top = 168
+    object qInvRowsID: TAutoIncField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ReadOnly = True
+      Required = False
+    end
+    object qInvRowsID_INVOICES: TLongintField
+      FieldKind = fkData
+      FieldName = 'ID_INVOICES'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qInvRowsID_PRODUCTS: TLongintField
+      DisplayLabel = 'ID_PRODUCT'
+      FieldKind = fkData
+      FieldName = 'ID_PRODUCTS'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qInvRowsPRICE: TFloatField
+      FieldKind = fkData
+      FieldName = 'PRICE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = -1
+    end
+    object qInvRowsQUANTITY: TFloatField
+      FieldKind = fkData
+      FieldName = 'QUANTITY'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = -1
+    end
+    object qInvRowsTAXABLE: TLongintField
+      FieldKind = fkData
+      FieldName = 'TAXABLE'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+  end
+  object dsInvoices: TDataSource
+    DataSet = qInvoices
+    Left = 112
+    Top = 226
+  end
+  object dsInvRows: TDataSource
+    DataSet = qInvRows
+    Left = 192
+    Top = 226
+  end
+  object qProducts: TSQLQuery
+    PacketRecords = -1
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NAME'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'PRICE'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'TAXABLE'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    Database = dm.dbDM
+    Transaction = dm.SQLTransaction1
+    ReadOnly = True
+    SQL.Strings = (
+      'select ID,NAME,PRICE,TAXABLE from PRODUCTS'
+    )
+    Options = [sqoKeepOpenOnCommit]
+    Params = <>
+    Macros = <>
+    Left = 272
+    Top = 168
+    object qProductsID: TLongintField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qProductsNAME: TMemoField
+      FieldKind = fkData
+      FieldName = 'NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object qProductsPRICE: TFloatField
+      FieldKind = fkData
+      FieldName = 'PRICE'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      Precision = -1
+    end
+    object qProductsTAXABLE: TLongintField
+      FieldKind = fkData
+      FieldName = 'TAXABLE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+  end
+  object dsProducts: TDataSource
+    DataSet = qProducts
+    Left = 272
+    Top = 226
+  end
+  object qClients: TSQLQuery
+    PacketRecords = -1
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NAME'
+        DataType = ftMemo
+        Precision = -1
+      end>
+    Database = dm.dbDM
+    Transaction = dm.SQLTransaction1
+    ReadOnly = True
+    SQL.Strings = (
+      'select ID,NAME from CLIENTS'
+    )
+    Options = [sqoKeepOpenOnCommit]
+    Params = <>
+    Macros = <>
+    Left = 352
+    Top = 168
+    object qClientsID: TLongintField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+    object qClientsNAME: TMemoField
+      FieldKind = fkData
+      FieldName = 'NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = MemoGetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+  end
+  object dsClients: TDataSource
+    DataSet = qClients
+    Left = 352
+    Top = 226
+  end
+end

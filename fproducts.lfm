@@ -1,0 +1,161 @@
+object foProducts: TfoProducts
+  Left = 316
+  Height = 600
+  Top = 161
+  Width = 800
+  Caption = 'Products'
+  ClientHeight = 600
+  ClientWidth = 800
+  OnClose = FormClose
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.0.12.0'
+  object DBGrid: TDBGrid
+    Left = 0
+    Height = 550
+    Top = 0
+    Width = 800
+    Align = alClient
+    Color = clWindow
+    Columns = <    
+      item
+        Title.Alignment = taCenter
+        Title.Caption = 'ID'
+        Width = 50
+        FieldName = 'ID'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Name/Description'
+        Width = 448
+        FieldName = 'NAME'
+      end    
+      item
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Price'
+        Width = 200
+        FieldName = 'PRICE'
+      end    
+      item
+        ButtonStyle = cbsCheckboxColumn
+        Title.Alignment = taCenter
+        Title.Font.Style = [fsBold]
+        Title.Caption = 'Taxable'
+        Width = 70
+        FieldName = 'TAXABLE'
+      end>
+    DataSource = DataSource
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColumnMove, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgDisplayMemoText]
+    TabOrder = 0
+    OnColEnter = DBGridColEnter
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 550
+    Width = 800
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 800
+    TabOrder = 1
+    object Button6: TButton
+      Left = 700
+      Height = 25
+      Top = 10
+      Width = 75
+      Anchors = [akTop, akRight]
+      Cancel = True
+      Caption = 'Close'
+      ModalResult = 2
+      TabOrder = 0
+    end
+  end
+  object DataSource: TDataSource
+    DataSet = Query
+    OnStateChange = DataSourceStateChange
+    Left = 32
+    Top = 96
+  end
+  object Query: TSQLQuery
+    PacketRecords = -1
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NAME'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'PRICE'
+        DataType = ftFloat
+        Precision = -1
+      end    
+      item
+        Name = 'TAXABLE'
+        DataType = ftInteger
+        Precision = -1
+      end>
+    BeforePost = QueryBeforePost
+    Database = dm.dbDM
+    Transaction = dm.SQLTransaction1
+    SQL.Strings = (
+      'select * from PRODUCTS'
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit]
+    Params = <>
+    Macros = <>
+    Left = 32
+    Top = 32
+    object QueryID: TAutoIncField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ReadOnly = True
+      Required = False
+    end
+    object QueryNAME: TMemoField
+      DisplayLabel = 'Name/Description'
+      FieldKind = fkData
+      FieldName = 'NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryPRICE: TFloatField
+      DisplayLabel = 'Price'
+      FieldKind = fkData
+      FieldName = 'PRICE'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnSetText = QueryPRICESetText
+      Precision = -1
+    end
+    object QueryTAXABLE: TLongintField
+      DisplayLabel = 'Taxable'
+      FieldKind = fkData
+      FieldName = 'TAXABLE'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+    end
+  end
+end

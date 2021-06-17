@@ -1,0 +1,565 @@
+object foSettings: TfoSettings
+  Left = 371
+  Height = 375
+  Top = 161
+  Width = 600
+  Caption = 'Settings'
+  ClientHeight = 375
+  ClientWidth = 600
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '2.0.12.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 325
+    Width = 600
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 600
+    TabOrder = 10
+    object Button4: TButton
+      Left = 25
+      Height = 25
+      Top = 10
+      Width = 75
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object Button6: TButton
+      Left = 500
+      Height = 25
+      Top = 10
+      Width = 75
+      Anchors = [akTop, akRight]
+      Caption = 'Save'
+      Default = True
+      Font.Style = [fsBold]
+      ModalResult = 1
+      ParentFont = False
+      TabOrder = 2
+    end
+    object bDelete: TButton
+      Left = 125
+      Height = 25
+      Top = 10
+      Width = 75
+      Caption = 'Delete'
+      Enabled = False
+      Font.Color = clRed
+      Font.Style = [fsBold]
+      ModalResult = 3
+      OnClick = bDeleteClick
+      ParentFont = False
+      TabOrder = 1
+      TabStop = False
+      Visible = False
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 30
+    Top = 25
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 1
+    object Label1: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 101
+      Caption = 'Business Name'
+      FocusControl = eName
+      ParentColor = False
+    end
+    object eName: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'NAME'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Height = 25
+    Top = 0
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 0
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 30
+    Top = 55
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 2
+    object Label2: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 42
+      Caption = 'E-mail'
+      FocusControl = eEmail
+      ParentColor = False
+    end
+    object eEmail: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'EMAIL'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+      OnChange = eEmailChange
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Height = 30
+    Top = 85
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 3
+    object Label3: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 52
+      Caption = 'Address'
+      FocusControl = eAddress
+      ParentColor = False
+    end
+    object eAddress: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'ADDRESS'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+    end
+  end
+  object Panel6: TPanel
+    Left = 0
+    Height = 30
+    Top = 115
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 4
+    object Label4: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 40
+      Caption = 'Phone'
+      FocusControl = ePhone
+      ParentColor = False
+    end
+    object ePhone: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'PHONE'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+      OnChange = ePhoneChange
+    end
+  end
+  object Panel7: TPanel
+    Left = 0
+    Height = 30
+    Top = 145
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 5
+    object Label5: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 114
+      Caption = 'Business Number'
+      FocusControl = eNumber
+      ParentColor = False
+    end
+    object eNumber: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'NUMBER'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+      OnChange = eNumberChange
+    end
+  end
+  object Panel8: TPanel
+    Left = 0
+    Height = 30
+    Top = 175
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 6
+    object Label6: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 136
+      Caption = 'Currency (ex. "USD")'
+      FocusControl = eCurrency
+      ParentColor = False
+    end
+    object eCurrency: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'CURRENCY'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+      OnChange = eCurrencyChange
+    end
+  end
+  object Panel9: TPanel
+    Left = 0
+    Height = 60
+    Top = 235
+    Width = 600
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 60
+    ClientWidth = 600
+    TabOrder = 8
+    object Label7: TLabel
+      Left = 25
+      Height = 34
+      Top = 6
+      Width = 87
+      Caption = 'Terms'#10'(one per line)'
+      ParentColor = False
+    end
+    object mTerms: TDBMemo
+      Left = 180
+      Height = 57
+      Top = 0
+      Width = 395
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      DataField = 'TERMS'
+      DataSource = DataSource1
+      ScrollBars = ssAutoBoth
+      TabOrder = 0
+    end
+  end
+  object Panel10: TPanel
+    Left = 0
+    Height = 30
+    Top = 295
+    Width = 600
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 9
+    object Label8: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 49
+      Caption = 'Tax (%)'
+      FocusControl = eTax
+      ParentColor = False
+    end
+    object eTax: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'TAX'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+      OnChange = eTaxChange
+    end
+  end
+  object Panel11: TPanel
+    Left = 0
+    Height = 30
+    Top = 205
+    Width = 600
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 30
+    ClientWidth = 600
+    TabOrder = 7
+    object Label9: TLabel
+      Left = 25
+      Height = 17
+      Top = 6
+      Width = 144
+      Caption = 'Invoice (ex. "INV900")'
+      FocusControl = eInvoice
+      ParentColor = False
+    end
+    object eInvoice: TDBEdit
+      Left = 180
+      Height = 27
+      Top = 0
+      Width = 395
+      DataField = 'INVOICE'
+      DataSource = DataSource1
+      Anchors = [akTop, akLeft, akRight]
+      CharCase = ecNormal
+      MaxLength = 0
+      TabOrder = 0
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = Query
+    Left = 32
+    Top = 96
+  end
+  object Query: TSQLQuery
+    PacketRecords = -1
+    MaxIndexesCount = 4
+    FieldDefs = <    
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        Precision = -1
+      end    
+      item
+        Name = 'NAME'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'EMAIL'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'ADDRESS'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'PHONE'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'NUMBER'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'CURRENCY'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'INVOICE'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'TERMS'
+        DataType = ftMemo
+        Precision = -1
+      end    
+      item
+        Name = 'TAX'
+        DataType = ftFloat
+        Precision = -1
+      end>
+    BeforePost = QueryBeforePost
+    Database = dm.dbDM
+    Transaction = dm.SQLTransaction1
+    SQL.Strings = (
+      'select * from SETTINGS'
+    )
+    Options = [sqoKeepOpenOnCommit, sqoAutoApplyUpdates, sqoAutoCommit]
+    Params = <>
+    Macros = <>
+    Left = 32
+    Top = 32
+    object QueryID: TAutoIncField
+      FieldKind = fkData
+      FieldName = 'ID'
+      Index = 0
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      ReadOnly = True
+      Required = False
+    end
+    object QueryNAME: TMemoField
+      DisplayLabel = 'Business Name'
+      FieldKind = fkData
+      FieldName = 'NAME'
+      Index = 1
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryEMAIL: TMemoField
+      DisplayLabel = 'E-mail'
+      FieldKind = fkData
+      FieldName = 'EMAIL'
+      Index = 2
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      OnSetText = QueryEMAILSetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryADDRESS: TMemoField
+      DisplayLabel = 'Address'
+      FieldKind = fkData
+      FieldName = 'ADDRESS'
+      Index = 3
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryPHONE: TMemoField
+      DisplayLabel = 'Phone'
+      FieldKind = fkData
+      FieldName = 'PHONE'
+      Index = 4
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryPHONEGetText
+      OnSetText = QueryPHONESetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryNUMBER: TMemoField
+      DisplayLabel = 'Business Number'
+      FieldKind = fkData
+      FieldName = 'NUMBER'
+      Index = 5
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryNUMBERGetText
+      OnSetText = QueryNUMBERSetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryCURRENCY: TMemoField
+      DisplayLabel = 'Currency'
+      FieldKind = fkData
+      FieldName = 'CURRENCY'
+      Index = 6
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      OnSetText = QueryCURRENCYSetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryINVOICE: TMemoField
+      DisplayLabel = 'Invoice'
+      FieldKind = fkData
+      FieldName = 'INVOICE'
+      Index = 7
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnGetText = QueryMemoGetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryTERMS: TMemoField
+      DisplayLabel = 'Terms'
+      FieldKind = fkData
+      FieldName = 'TERMS'
+      Index = 8
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnSetText = QueryTERMSSetText
+      BlobType = ftMemo
+      Transliterate = False
+    end
+    object QueryTAX: TFloatField
+      Alignment = taLeftJustify
+      DisplayLabel = 'Tax'
+      FieldKind = fkData
+      FieldName = 'TAX'
+      Index = 9
+      LookupCache = False
+      ProviderFlags = [pfInUpdate, pfInWhere]
+      ReadOnly = False
+      Required = True
+      OnSetText = QueryTAXSetText
+      Precision = -1
+    end
+  end
+end
