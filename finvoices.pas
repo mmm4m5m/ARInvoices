@@ -1,5 +1,8 @@
 unit fInvoices;
 
+// todo: View Invoice
+// todo: Set 'Paid' button and DBGrid click
+
 {$mode objfpc}{$H+}
 
 interface
@@ -16,7 +19,7 @@ type
     Query: TSQLQuery;
     QueryDUEDATE: TMemoField;
     QueryID: TAutoIncField;
-    DataSource1: TDataSource;
+    DataSource: TDataSource;
     DBGrid: TDBGrid;
     Panel1: TPanel;
     bInvoice: TButton;
@@ -56,6 +59,7 @@ end;
 procedure TfoInvoices.bSetPaidClick(Sender: TObject);
 begin
   // todo: set DueDate to PaidDate
+  ShowMessage('Not implemented.');
 end;
 
 procedure TfoInvoices.bInvoiceClick(Sender: TObject);

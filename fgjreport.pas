@@ -1,5 +1,8 @@
 unit fGJReport;
 
+// todo: hide DBGrid
+// todo: verify format of SQLite 'date' function
+
 {$mode objfpc}{$H+}
 
 interface

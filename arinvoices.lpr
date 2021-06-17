@@ -1,4 +1,8 @@
+// by mmm4m5m (2021)
+
 program ARInvoices;
+
+// Create and save AR invoices. Show 'General Journal' on screen. Using SQLite db.
 
 {$mode objfpc}{$H+}
 
