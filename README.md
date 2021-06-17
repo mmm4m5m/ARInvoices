@@ -20,8 +20,8 @@ Create AR invoices and generate General Journal. (Lazarus/Free Pascal, SQLite)
 
 ### General Journal (pending finalizations)
 
-#### Sales tax per month:
+#### Sales tax per month (last):
 ![image](https://user-images.githubusercontent.com/995706/122393750-e1bc2e80-cf7d-11eb-96f1-b5877adab818.png)
 
-#### Sales tax per day:
+#### Sales tax per day (old):
 ![image](https://user-images.githubusercontent.com/995706/122393723-da952080-cf7d-11eb-8170-ed0e0f241be5.png)
