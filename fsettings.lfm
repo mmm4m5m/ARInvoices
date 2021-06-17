@@ -86,7 +86,7 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'NAME'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
@@ -127,7 +127,7 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'EMAIL'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
@@ -160,7 +160,7 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'ADDRESS'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
@@ -192,7 +192,7 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'PHONE'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
@@ -225,7 +225,7 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'NUMBER'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
@@ -258,7 +258,7 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'CURRENCY'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
@@ -291,7 +291,7 @@ object foSettings: TfoSettings
       Width = 395
       Anchors = [akTop, akLeft, akRight, akBottom]
       DataField = 'TERMS'
-      DataSource = DataSource1
+      DataSource = DataSource
       ScrollBars = ssAutoBoth
       TabOrder = 0
     end
@@ -321,7 +321,7 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'TAX'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
@@ -354,14 +354,14 @@ object foSettings: TfoSettings
       Top = 0
       Width = 395
       DataField = 'INVOICE'
-      DataSource = DataSource1
+      DataSource = DataSource
       Anchors = [akTop, akLeft, akRight]
       CharCase = ecNormal
       MaxLength = 0
       TabOrder = 0
     end
   end
-  object DataSource1: TDataSource
+  object DataSource: TDataSource
     DataSet = Query
     Left = 32
     Top = 96

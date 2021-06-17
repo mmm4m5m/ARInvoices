@@ -1,5 +1,11 @@
 unit dmARInvoices;
 
+// todo DB schema: We need date of payment. Add INVOICES.PAIDDATE or change the name of INVOICES.DUEDATE
+// todo DB schema: rename CLIENTS.NAME, PRODUCTS.NAME, SETTINGS.NAME
+// todo DB schema: rename SETTINGS.CURRENCY, SETTINGS.NUMBER, SETTINGS.TERMS, SETTINGS.INVOICE
+// todo DB schema: add PRODUCT.CURRENCY? products have the same price after change SETTINGS.CURRENCY
+// todo DB schema: add INVOICES_ROWS.ROWNUM
+
 {$mode objfpc}{$H+}
 
 interface
@@ -9,7 +15,7 @@ uses
   Classes, SysUtils, SQLite3Conn, SQLDB;
 
 const
-  IARISOverdue=-1;
+  IARISOverdue=-1; // negative - it is not a DB status
   IARISPending= 0;
   IARISPaid   = 1;
 
@@ -17,9 +23,8 @@ const
   SARIEditFormat    ='#';
   SARIFloatFormat   ='#0.00';
   SARITaxFormat     ='#0.00 "%"';
-  SARIThousandFormat=',#0.00';
   SARIPriceFormat   =',#0.00 "%s"';
-  SARIDateFormat    ='yyyy-mm-dd';
+  SARIDateFormat    ='yyyy-mm-dd'; // date in DB is saved as string
 
 type
   TARIEditorTextChanged=procedure(Edit: TCustomMaskEdit; Field: TField) of object;
@@ -61,14 +66,16 @@ var
   dm: Tdm;
 
 
-function  GetDigitsOnly(const aText: string): string;
-procedure PhoneGetText(Field: TField; var aText: string; DisplayText: Boolean);
-procedure NumberGetText(Field: TField; var aText: string; DisplayText: Boolean);
 function  InvoiceStatus(Status: integer; DueDate: TDateTime): integer;
 procedure StatusGetText(InvoiceStatus: integer; var aText: string; DisplayText: Boolean);
 
+function  GetDigitsOnly(const aText: string): string;
+procedure PhoneGetText(Field: TField; var aText: string; DisplayText: Boolean);
+procedure NumberGetText(Field: TField; var aText: string; DisplayText: Boolean);
+
 procedure ValidateError(const Value, Field: string);
 procedure SetEditValid(IsValid: boolean; Edit: TCustomMaskEdit);
+
 function  EmailValidate(const Value: string; const Field: string=''): boolean; overload;
 procedure EmailValidate(Edit: TCustomMaskEdit); overload;
 function  PhoneValidate(const Value: string; const Field: string=''): boolean; overload;
@@ -89,16 +96,31 @@ uses
 
 const
   SARIErrInvalid  ='Value "%s" is not valid.';
-  IARIEmailMinLen =8;
-  IARIPhoneMinLen =7;
+  IARIEmailMinLen =8; // example: aa@aa.cc // todo: aa@aaa.c is shown as valid
+  IARIPhoneMinLen =7; // example: (123) 456 7
   SARIPhoneFormat ='(%s) %s %s';
-  IARINumberMinLen=6;
+  IARINumberMinLen=6; // example: 123-45-6
   SARINumberFormat='%s-%s-%s';
 
 const
   SARISOverdue='OVERDUE';
   SARISPending='Pending';
   SARISPaid   ='Paid';
+
+function InvoiceStatus(Status: integer; DueDate: TDateTime): integer;
+begin
+  Result:=Status;
+  if (Status<>IARISPaid) and (Trunc(DueDate)<Trunc(Date)) then Result:=IARISOverdue;
+end;
+
+procedure StatusGetText(InvoiceStatus: integer; var aText: string; DisplayText: Boolean);
+begin
+  aText:=SARISPending;
+  case InvoiceStatus of
+    IARISOverdue: aText:=SARISOverdue;
+    IARISPaid:    aText:=SARISPaid;
+  end;
+end;
 
 function GetDigitsOnly(const aText: string): string;
 var i: integer;
@@ -119,21 +141,6 @@ begin
   aText:=Field.AsString;
   if DisplayText and (Length(aText)>=IARINumberMinLen)
     then aText:=Format(SARINumberFormat, [Copy(aText,1,3), Copy(aText,4,2), Copy(aText, 6, MAXINT)])
-end;
-
-function InvoiceStatus(Status: integer; DueDate: TDateTime): integer;
-begin
-  Result:=Status;
-  if (Status<>IARISPaid) and (Trunc(DueDate)<Trunc(Date)) then Result:=IARISOverdue;
-end;
-
-procedure StatusGetText(InvoiceStatus: integer; var aText: string; DisplayText: Boolean);
-begin
-  aText:=SARISPending;
-  case InvoiceStatus of
-    IARISOverdue: aText:=SARISOverdue;
-    IARISPaid:    aText:=SARISPaid;
-  end;
 end;
 
 procedure ValidateError(const Value, Field: string);
@@ -234,6 +241,8 @@ end;
 { TARIDBGrid }
 
 // modified copy of TCustomDBGrid.EditorCanAcceptKey
+// dgDisplayMemoText will call Field.AsString instead the default - Field.DisplayText
+// we need DisplayText in order to format the phone, business number, etc.
 function TARIDBGrid.EditorCanAcceptKey(const ch: TUTF8Char): boolean;
 var aField: TField;
 begin
@@ -246,6 +255,7 @@ begin
     //and (not aField.IsBlob or CheckDisplayMemo(aField));
 end;
 
+// for validating the input data on change and visualize invalid input with 'red' color
 procedure TARIDBGrid.SetEditText(ACol, ARow: Longint; const Value: string);
 begin
   inherited;
@@ -262,9 +272,12 @@ procedure Tdm.DataModuleCreate(Sender: TObject);
 begin
   Terms:=TStringList.Create;
 
-  // SQLite library                              // run-time (in IDE) - check README.TXT
+  // load SQLite library
   if TryInitializeSQLite('')=-1                  // sqlite3.inc: SQLiteDefaultLibrary
     then TryInitializeSQLite('libsqlite3.so.0'); // debian 10 default
+  // SQLite library for IDE (debian 10 default):
+  // $ ln -s /usr/lib/x86_64-linux-gnu/libsqlite3.so.0 ...-project-dir/libsqlite3.so
+  // $ LD_LIBRARY_PATH=...-project-dir lazarus &
 
   dbDM.Connected:=True;
 end;

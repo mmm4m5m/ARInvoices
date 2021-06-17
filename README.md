@@ -1,5 +1,7 @@
 # ARInvoices
-Create AR invoices and generate General Journal. (Lazarus/Free Pascal, SQLite)
+Create and save AR invoices. Show General Journal on screen. Using SQLite db.
+
+Todo: View/Edit invoice; Finalize New Invoice; Generate new invoice number (based on pattern)
 
 ## Screenshots
 
@@ -15,13 +17,14 @@ Create AR invoices and generate General Journal. (Lazarus/Free Pascal, SQLite)
 ### Clients screen:
 ![image](https://user-images.githubusercontent.com/995706/122371248-6603b700-cf68-11eb-885f-bbb6bbede8ae.png)
 
-### New Invoice (pending finalizations):
+### New Invoice
 ![image](https://user-images.githubusercontent.com/995706/122370832-10c7a580-cf68-11eb-8f05-638ad20a39f8.png)
 
-### General Journal (pending finalizations)
+### General Journal
 
 #### Sales tax per month:
 ![image](https://user-images.githubusercontent.com/995706/122393750-e1bc2e80-cf7d-11eb-96f1-b5877adab818.png)
 
 #### Sales tax per day:
 ![image](https://user-images.githubusercontent.com/995706/122393723-da952080-cf7d-11eb-8170-ed0e0f241be5.png)
+
