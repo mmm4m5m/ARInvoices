@@ -126,14 +126,14 @@ Add conditional define in 'Project Options, Compiler Options, Custom Options':
 -dFPCFG_DEBUG_UNITS
 ```
 
-### Done!
+#### Done!
 
 
 ### 5. Notes about Lazarus source
 
 The concept of 'Use Debug DCUs' does NOT apply for Lazarus source.
 
-Lazarus (lazbuild) will rebuild the source and packages as needed.
+Lazarus (and lazbuild) will rebuild the source and packages as needed.
 
 If you want to disable step debug, then build 'Optimized IDE' and you will have UNITS without debug info.
 
