@@ -102,7 +102,7 @@ Before '#else' copy the default '-Fu' lines and adjusted the paths to debug unit
 
 #else
 
-# HERE the default '-Fu' lines - path without '-debug'
+# HERE the default '-Fu' lines - paths without '-debug'
 ...
 -Fu$HOME$/fpc/fpc-$fpcversion/lib/fpc/$fpcversion/units/$fpctarget
 ...
