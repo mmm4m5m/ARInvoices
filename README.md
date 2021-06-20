@@ -1,6 +1,8 @@
 # ARInvoices
 Create and save AR invoices. Show General Journal on screen. Using SQLite db.
 
+TODO: CREATE DB!
+
 Todo: View/Edit invoice; Finalize New Invoice; Generate new invoice number (based on pattern)
 
 ## Screenshots
