@@ -67,7 +67,7 @@ Decide which 'fpc.cfg' file, find the lines pointing to the previous compiler an
 Test it works - https://wiki.lazarus.freepascal.org/Installing_the_Free_Pascal_Compiler#Testing_the_FPC_Install
 
 
-#### Back to step debug into FPC source
+### 3. Setup FPC to use debug units
 
 In 'fpc.cfg' file add '#ifdef FPCFG_DEBUG_UNITS ... #else ... #endif'
 
@@ -117,7 +117,7 @@ Before '#else' copy the default '-Fu' lines and adjusted the paths to debug unit
 ( And single '-Fu' path like: -Fu/path/fpc-$fpcversion$DEBUG_SUFFIX/... )
 
 
-### 3. Setup your project to use FPC debug units
+### 4. Setup your project to use FPC debug units
 
 If you like, you can add new build mode - 'Debug FPC'.
 
@@ -129,7 +129,7 @@ Add conditional define in 'Project Options, Compiler Options, Custom Options':
 ### Done!
 
 
-### 4. Notes about Lazarus source
+### 5. Notes about Lazarus source
 
 The concept of 'Use Debug DCUs' does NOT apply for Lazarus source.
 
