@@ -1,7 +1,9 @@
 
 ## Lazarus: Step debug into FPC source (or 'Use Debug DCUs' for FPC source)
 
-We will use conditional define in FPC config file - FPCFG_DEBUG_UNITS. When it is defined, the compiler will use (-Fu) FPC units build with debug info.
+We will use conditional define in FPC config file - FPCFG_DEBUG_UNITS.
+
+When it is defined, the compiler will use (-Fu) FPC units build with debug info.
 
 In Lazarus project we will use this conditional define for Debug build mode.
 
